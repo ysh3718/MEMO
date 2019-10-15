@@ -32,6 +32,25 @@ public class MEMODAO {
 	}
 
 	
-	
-	
+	/******************************************************************************************/
+	// DB 연결해제 메소드
+	/******************************************************************************************/
+	void disconnect() {
+		if(pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} 
+		if(conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+
 }
