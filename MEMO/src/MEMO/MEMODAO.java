@@ -52,5 +52,39 @@ public class MEMODAO {
 		}
 	}
 
+	/******************************************************************************************/
+	// 메모장 입력 메서드
+	/******************************************************************************************/
+	public boolean insertDB(MEMODTO MEMODTO) {
+		
+		
+		connect();
+		
+		// id 는 자동 등록 되므로 입력하지 않는다.				
+		String sql ="insert into MEMO(title,content, memoDate) values(?,?,?)";
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+
+			// SQL문에 변수 입력
+			pstmt.setString(1,MEMODTO.getTitle());
+			pstmt.setString(2,MEMODTO.getContent());
+			pstmt.setString(3,MEMODTO.getMemoDate());
+			
+			//SQL문 실행
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			disconnect();
+		}
+		return true;
+	}
+	
+	
 
 }
