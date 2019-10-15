@@ -86,5 +86,47 @@ public class MEMODAO {
 	}
 	
 	
+	/******************************************************************************************/
+	// 메모장 조회 메서드
+	/******************************************************************************************/
+	public ArrayList<MEMODTO> getDBList() {
+		
+		connect();
+		
+		ArrayList<MEMODTO> MEMOList = new ArrayList<MEMODTO>();
+		
+		String sql = "select id, title, content, memoDate from Memo";
+
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			//SQL문 실행
+			ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				
+				// DO 객체 생성
+				MEMODTO MEMODTO = new MEMODTO();
+				
+				// DB Select결과를 DO 객체에 저장
+				MEMODTO.setId(rs.getInt("id"));
+				MEMODTO.setTitle(rs.getString("title"));
+				MEMODTO.setContent(rs.getString("content"));
+				MEMODTO.setMemoDate(rs.getString("memoDate"));
+				
+				MEMOList.add(MEMODTO);
+			}
+			rs.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			disconnect();
+		}
+		return MEMOList;
+	}
+
 
 }
