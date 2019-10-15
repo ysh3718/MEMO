@@ -203,5 +203,35 @@ public class MEMODAO {
 	}
 	
 	
+	/******************************************************************************************/
+	// 메모장 삭제 메서드
+	/******************************************************************************************/
+	public boolean deleteDB(int id) {
+		
+		
+		connect();
+		
+		// id로 매칭하여 delete				
+		String sql ="delete from MEMO where id=?";
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
 
+			// SQL문에 변수 입력
+			pstmt.setInt(1,id);
+						
+			//SQL문 실행
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+		}
+		return true;
+	}
+	
+	
 }
