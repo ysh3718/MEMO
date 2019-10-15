@@ -168,5 +168,40 @@ public class MEMODAO {
 		}
 		return MEMODTO;
 	}
+
+	/******************************************************************************************/
+	// 메모장 수정 메서드
+	/******************************************************************************************/
+	public boolean updateDB(int id, MEMODTO MEMODTO) {
+		
+		
+		connect();
+		
+		// id로 매칭하여 update(계좌이체일자와 계좌이체금액만 수정 가능)				
+		String sql ="update MEMO set memoDate=?, content=?, title=? where id=?";
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+
+			// SQL문에 변수 입력
+			pstmt.setString(1,MEMODTO.getMemoDate());
+			pstmt.setString(2,MEMODTO.getContent());
+			pstmt.setString(3,MEMODTO.getTitle());
+			pstmt.setInt(4,id);
+		
+			//SQL문 실행
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			disconnect();
+		}
+		return true;
+	}
 	
+	
+
 }
