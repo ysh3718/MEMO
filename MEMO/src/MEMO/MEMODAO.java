@@ -18,5 +18,20 @@ public class MEMODAO {
 	String jdbc_url = "jdbc:mysql://127.0.0.1/jspdb?useSSL=true&verifyServerCertificate=false&serverTimezone=UTC";
 
 	
+	/******************************************************************************************/
+	// DB연결 메서드
+	/******************************************************************************************/
+	void connect() {
+		try {
+			Class.forName(jdbc_driver);
 
+			conn = DriverManager.getConnection(jdbc_url,"jspbook","1234");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	
+	
+	
 }
